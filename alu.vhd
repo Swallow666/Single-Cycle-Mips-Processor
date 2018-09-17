@@ -11,5 +11,22 @@ port(x, y : in std_logic_vector(31 downto 0); -- two input operands
 end alu;
 
 architecture behav of alu is
+  signal logic_unit_out : std_logic_vector(31 downto 0);
 begin
+  process(x,y,logic_func)   -- logic unit
+  begin
+    case logic_func is
+      when "00"=>
+      logic_unit_out<=x and y;
+      when "01"=>
+      logic_unit_out<=x or y;
+      when "10"=>
+      logic_unit_out<=x xor y;
+      when "11"=>
+      logic_unit_out<=x nor y;
+      when others=>
+      null;
+    end case;
+  end process;
+
 end behav;
