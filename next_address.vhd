@@ -12,28 +12,29 @@ port(rt, rs : in std_logic_vector(31 downto 0);
 end next_address ;
 
 architecture behav of next_address is
-  signal offset: std_logic_vector(15 downto 0):=target_address(15 downto 0);
+  signal offset: signed(15 downto 0);
   begin
-  process(pc_sel,branch_type,pc,rs,rt,offset,target_address)     --pc_sel, branch_type
-  begin
-  case pc_sel is
-    when "00"=>
-    case branch_type is
-      when "00"=>
-      next_pc<=std_logic_vector(unsigned(pc)+1);
-      when "01"=>
-      if (rs=rt)then
-        next_pc<=std_logic_vector(signed(unsigned(pc)+1)+signed(offset));
-      else next_pc<=std_logic_vector(unsigned(pc)+1);
-      end if;
-      when "10"=>
-      if (rs/=rt)then
-        next_pc<=std_logic_vector(signed(unsigned(pc)+1)+signed(offset));
-      else next_pc<=std_logic_vector(unsigned(pc)+1);
+    offset<=signed(target_address(15 downto 0));
+    process(pc_sel,branch_type,pc,rs,rt,offset,target_address)     --pc_sel, branch_type
+    begin
+      case pc_sel is
+        when "00"=>
+        case branch_type is
+          when "00"=>
+          next_pc<=std_logic_vector(unsigned(pc)+1);
+          when "01"=>
+          if (rs=rt)then
+            next_pc<=std_logic_vector(signed(unsigned(pc)+1)+offset);
+          else next_pc<=std_logic_vector(unsigned(pc)+1);
+        end if;
+        when "10"=>
+        if (rs/=rt)then
+          next_pc<=std_logic_vector(signed(unsigned(pc)+1)+offset);
+        else next_pc<=std_logic_vector(unsigned(pc)+1);
       end if;
       when "11"=>
       if (signed(rs)<0)then
-        next_pc<=std_logic_vector(signed(unsigned(pc)+1)+signed(offset));
+        next_pc<=std_logic_vector(signed(unsigned(pc)+1)+offset);
       else next_pc<=std_logic_vector(unsigned(pc)+1);
       end if;
       when others=>
@@ -46,5 +47,5 @@ architecture behav of next_address is
     when others=>
     null;
   end case;
-  end process;
+end process;
 end behav;
