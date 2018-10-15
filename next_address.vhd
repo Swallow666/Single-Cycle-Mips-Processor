@@ -1,3 +1,4 @@
+library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 entity next_address is
@@ -12,6 +13,7 @@ end next_address ;
 
 architecture behav of next_address is
   signal offset: std_logic_vector(15 downto 0):=target_address(15 downto 0);
+  begin
   process(pc_sel,branch_type,pc,rs,rt,offset,target_address)     --pc_sel, branch_type
   begin
   case pc_sel is
