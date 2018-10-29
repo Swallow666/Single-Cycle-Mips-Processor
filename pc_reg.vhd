@@ -17,8 +17,8 @@ architecture behav of pc_reg is
       if(reset='1')then
         hook<=(others=>'0');
       elsif(clk'event and clk='1')then
-        pc_reg_out<=hook;
+        hook<=pc_reg_in;
       end if;
     end process;
-    hook<=pc_reg_in;
+    pc_reg_out<=hook;
 end behav;
