@@ -1,5 +1,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
 entity d_cache is
   port(
   reset: in std_logic;
@@ -13,7 +14,7 @@ end d_cache;
 
 architecture behav of d_cache is
   type dcache is array(0 to 31) of std_logic_vector(31 downto 0);
-  signal datas: dcache:(others=>(others=>'0'));
+  signal datas: dcache:=(others=>(others=>'0'));
   begin
     process(reset,clk)
     begin

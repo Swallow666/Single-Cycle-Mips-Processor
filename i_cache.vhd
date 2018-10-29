@@ -10,7 +10,7 @@ end i_cache;
 
 architecture behav of i_cache is
   type icache is array(0 to 31) of std_logic_vector(31 downto 0);
-  signal instructions: icache:(others=>(others=>'0'));
+  signal instructions: icache:=(others=>(others=>'0'));
   begin
     d_out<=instructions(conv_integer(a_in));
 end behav;

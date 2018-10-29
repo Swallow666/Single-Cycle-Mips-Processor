@@ -14,7 +14,7 @@ architecture behav of pc_reg is
     process(clk,reset)
     begin
       if(reset='1')then
-        pc_reg_out<='0';
+        pc_reg_out<=(others=>'0');
       elsif(clk'event and clk='1')then
         pc_reg_out<=pc_reg_in;
       end if;
