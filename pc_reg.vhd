@@ -10,13 +10,15 @@ entity pc_reg is
 end pc_reg;
 
 architecture behav of pc_reg is
+  signal hook: std_logic_vector(31 downto 0);
   begin
     process(clk,reset)
     begin
       if(reset='1')then
-        pc_reg_out<=(others=>'0');
+        hook<=(others=>'0');
       elsif(clk'event and clk='1')then
-        pc_reg_out<=pc_reg_in;
+        pc_reg_out<=hook;
       end if;
     end process;
+    hook<=pc_reg_in;
 end behav;
