@@ -17,6 +17,7 @@ entity control is
   );
 end control;
 
+-- assign random values for all don't care condition
 architecture behav of control is
   begin
     process(op,funct)
@@ -112,6 +113,8 @@ architecture behav of control is
           func<="10";
           branch_type<="00";
           pc_sel<="10";
+          when others=>
+          null;
         end case;
         when "001111"=> --lui
         reg_write<='1';
@@ -245,6 +248,8 @@ architecture behav of control is
         func<="10";
         branch_type<="10";
         pc_sel<="00";
+        when others=>
+        null;
       end case;
     end process;
 end behav;

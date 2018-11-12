@@ -6,7 +6,7 @@ port(x, y : in std_logic_vector(31 downto 0);   -- two input operands
      add_sub : in std_logic;   -- 0 = add , 1 = sub
      logic_func : in std_logic_vector(1 downto 0 );   --  00 = AND, 01 = OR , 10 = XOR , 11 = NOR
      func       : in std_logic_vector(1 downto 0 );   --  00 = lui, 01 = setless , 10 = arith , 11 = logic
-     output     : out std_logic_vector(31 downto 0);
+     alu_output     : out std_logic_vector(31 downto 0);
      overflow   : out std_logic;
      zero       : out std_logic);
 end alu;
@@ -74,16 +74,16 @@ process(x,y,ari_out,logic_unit_out,func,add_sub)   -- mul
 begin
 case func is
 when "00"=>
-output<=y;
+alu_output<=y;
 when "01"=>
 if(x < y)and(add_sub='1')then
-output<=(0=>'1',others=>'0');
-else output<=(others=>'0');
+alu_output<=(0=>'1',others=>'0');
+else alu_output<=(others=>'0');
 end if;
 when "10"=>
-output<=ari_out;
+alu_output<=ari_out;
 when "11"=>
-output<=logic_unit_out;
+alu_output<=logic_unit_out;
 when others=>
 null;
 end case;
