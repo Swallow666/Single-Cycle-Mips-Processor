@@ -1,2 +1,2 @@
-# Building a single cycle CPU by VHDL
-more vhdl on computer architecture&amp; design
+# Builded a single cycle CPU by VHDL
+On 316 computer architecture&amp; design
