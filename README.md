@@ -1,2 +1,2 @@
-# Builded a single cycle mips processor by VHDL
+# Built a single cycle mips processor by VHDL
 On 316 computer architecture&amp; design
